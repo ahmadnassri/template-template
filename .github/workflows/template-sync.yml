@@ -3,10 +3,8 @@ name: template-sync
 on:
   pull_request:
 
-  workflow_run:
-    workflows: [ release ]
+  push:
     branches: [ master ]
-    types: [ completed ]
 
 jobs:
   template-sync:
@@ -16,7 +14,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: ahmadnassri/action-workflow-run-wait@v1
       - uses: ahmadnassri/action-workflow-queue@v1
       - uses: ahmadnassri/action-template-repository-sync@v1
         with:
