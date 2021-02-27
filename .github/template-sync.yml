@@ -4,4 +4,5 @@ additional:
 
 files:
   - "!README.md"
+  - "!colophon.yml"
   - "!**/template-sync.yml"
