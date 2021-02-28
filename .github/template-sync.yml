@@ -4,5 +4,7 @@ additional:
 
 files:
   - "!README.md"
+  - "!docs/**"
   - "!colophon.yml"
+  - "!docker-compose.yml"
   - "!**/template-sync.yml"
