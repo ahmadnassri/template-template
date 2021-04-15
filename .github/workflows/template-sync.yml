@@ -11,7 +11,7 @@ on:
     branches: master
 
 jobs:
-  is-pull-request:
+  is-pull-or-push:
     timeout-minutes: 5
 
     runs-on: ubuntu-latest
@@ -23,7 +23,7 @@ jobs:
       - run: echo ::info ::this is a pull_request event
 
   template-sync:
-    needs: is-pull-request
+    needs: is-pull-or-push
 
     timeout-minutes: 20
 
