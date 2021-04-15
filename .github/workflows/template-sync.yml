@@ -1,17 +1,31 @@
-# ----------------------------------------------------------- #
-# Note: this file originates in ahmadnassri/template-template #
-# ----------------------------------------------------------- #
+# ------------------------------------------------------------- #
+# Note: this file is automatically managed in template-template #
+# ------------------------------------------------------------- #
 
 name: template-sync
 
 on:
   pull_request:
+  pull_request_target:
 
   push:
-    branches: [ master ]
+    branches: master
 
 jobs:
+  is-pull-request:
+    timeout-minutes: 5
+
+    runs-on: ubuntu-latest
+
+    # listen to pull_request_target but only run on pull_request
+    if: github.event_name	=== 'pull_request'
+
+    steps:
+      - run: echo ::info ::this is a pull_request event
+
   template-sync:
+    needs: is-pull-request
+
     timeout-minutes: 20
 
     runs-on: ubuntu-latest
