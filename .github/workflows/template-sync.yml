@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # listen to pull_request_target but only run on push, pull_request
-    if: github.event_name	== 'push' || github.event_name	== 'pull_request'
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
 
     steps:
       - run: echo ::info ::this is a pull_request event
