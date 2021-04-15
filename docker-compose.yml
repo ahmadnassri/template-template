@@ -7,9 +7,11 @@ services:
     volumes:
       - ./:/tmp/lint
     environment:
+      LOG_LEVEL: ERROR
       RUN_LOCAL: 'true'
-      LOG_LEVEL: 'ERROR'
       MULTI_STATUS: 'false'
+      VALIDATE_SHELL_SHFMT: 'false'
+      VALIDATE_JSCPD: 'false'
 
   # ---- readme generator ---- #
   readme:
