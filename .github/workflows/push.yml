@@ -1,0 +1,51 @@
+on: push
+
+name: push
+
+jobs:
+  commit-lint:
+    timeout-minutes: 5
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ahmadnassri/action-commit-lint@v1
+        with:
+          config: .github/linters/.commit-lint.yml
+
+  super-linter:
+    timeout-minutes: 5
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: github/super-linter@v3.15.5
+        env:
+          LOG_LEVEL: ERROR
+          VALIDATE_ALL_CODEBASE: false
+          FILTER_REGEX_EXCLUDE: '/github/workspace/README.md|test/fixtures/*'
+          GITHUB_TOKEN: ${{ github.token }}
+
+  template-sync:
+    timeout-minutes: 20
+
+    # only runs on main branch
+    if: ${{ github.ref == 'refs/heads/master' }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: ahmadnassri/action-workflow-queue@v1.1
+
+      - uses: actions/checkout@v2
+
+      - uses: ahmadnassri/action-template-repository-sync@v1.6.0
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          dry-run: true

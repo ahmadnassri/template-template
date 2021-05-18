@@ -7,4 +7,5 @@ files:
   - "!docs/**"
   - "!colophon.yml"
   - "!docker-compose.yml"
-  - "!.github/template-sync.yml"
+  - "!**/template-sync.yml"
+  - "!.github/workflows/push.yml"
