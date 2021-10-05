@@ -2,16 +2,14 @@ version: '3.8'
 
 services:
   # ---- super-linter ---- #
-  super-linter:
+  lint:
     image: github/super-linter:slim-v4
     volumes:
       - ./:/tmp/lint
     environment:
-      LOG_LEVEL: ERROR
+      LOG_LEVEL: 'ERROR'
       RUN_LOCAL: 'true'
       MULTI_STATUS: 'false'
-      VALIDATE_SHELL_SHFMT: 'false'
-      VALIDATE_JSCPD: 'false'
 
   # ---- readme generator ---- #
   readme:
