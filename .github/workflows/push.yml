@@ -25,7 +25,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: github/super-linter@v3.15.5
+      - uses: github/super-linter@v4.0.2
         env:
           LOG_LEVEL: ERROR
           VALIDATE_ALL_CODEBASE: false
@@ -34,6 +34,10 @@ jobs:
 
   template-sync:
     timeout-minutes: 20
+
+    needs:
+      - commit-lint
+      - super-linter
 
     # only runs on main branch
     if: ${{ github.ref == 'refs/heads/master' }}
@@ -48,4 +52,3 @@ jobs:
       - uses: ahmadnassri/action-template-repository-sync@v1.6.0
         with:
           github-token: ${{ secrets.GH_TOKEN }}
-          dry-run: true
