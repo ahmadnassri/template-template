@@ -5,11 +5,15 @@ services:
   lint:
     image: github/super-linter:slim-v4
     volumes:
-      - ./:/tmp/lint
+      - ./:/github/workspace
     environment:
-      LOG_LEVEL: 'ERROR'
       RUN_LOCAL: 'true'
+      LOG_LEVEL: 'ERROR'
       MULTI_STATUS: 'false'
+      VALIDATE_JSCPD: 'false'
+      IGNORE_GITIGNORED_FILES: 'true'
+      DEFAULT_WORKSPACE: /github/workspace
+      FILTER_REGEX_EXCLUDE: '/github/workspace/README.md'
 
   # ---- readme generator ---- #
   readme:
