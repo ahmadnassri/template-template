@@ -3,9 +3,11 @@ additional:
   - "template-*"
 
 files:
-  - "!README.md"
-  - "!docs/**"
+  - "!.github/workflows/push.yml"
+  - "!.gitignore"
+  - "!**/template-sync.yml"
   - "!colophon.yml"
   - "!docker-compose.yml"
-  - "!**/template-sync.yml"
-  - "!.github/workflows/push.yml"
+  - "!docs/**"
+  - "!Makefile"
+  - "!README.md"
