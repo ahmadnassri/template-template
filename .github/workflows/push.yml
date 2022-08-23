@@ -2,6 +2,9 @@ on: push
 
 name: push
 
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+
 jobs:
   commit-lint:
     timeout-minutes: 5
@@ -15,30 +18,36 @@ jobs:
         with:
           config: .github/linters/.commit-lint.yml
 
-  super-linter:
+
+  mega-linter:
     timeout-minutes: 5
 
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3.0.2
-        with:
-          fetch-depth: 0
 
-      - uses: github/super-linter/slim@v4
+      - uses: oxsecurity/megalinter@v6
         env:
-          LOG_LEVEL: ERROR
-          VALIDATE_ALL_CODEBASE: 'false'
-          IGNORE_GITIGNORED_FILES: 'true'
-          FILTER_REGEX_EXCLUDE: '/github/workspace/README.md|test/fixtures/*'
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          MEGALINTER_CONFIG: .github/linters/.mega-linter.yml
+          GITHUB_COMMENT_REPORTER: true
+          GITHUB_STATUS_REPORTER: true
+
+      - uses: actions/upload-artifact@v2
+        if: ${{ success() }} || ${{ failure() }}
+        with:
+          name: MegaLinter reports
+          path: |
+            megalinter-reports
+            mega-linter.log
 
   template-sync:
     timeout-minutes: 20
 
     needs:
       - commit-lint
-      - super-linter
+      - mega-linter
 
     # only runs on main branch
     if: ${{ github.ref == 'refs/heads/master' }}
@@ -46,8 +55,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ahmadnassri/action-workflow-queue@v1.1
-
       - uses: actions/checkout@v3.0.2
 
       - uses: ahmadnassri/action-template-repository-sync@v1.6.0
