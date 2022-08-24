@@ -28,7 +28,7 @@ jobs:
 
       - uses: oxsecurity/megalinter@v6
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           MEGALINTER_CONFIG: .github/linters/.mega-linter.yml
           GITHUB_COMMENT_REPORTER: true
           GITHUB_STATUS_REPORTER: true
@@ -56,6 +56,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3.0.2
 
-      - uses: ahmadnassri/action-template-repository-sync@v1.6.0
+      - uses: ahmadnassri/action-template-repository-sync@v2
         with:
           github-token: ${{ secrets.GH_TOKEN }}
