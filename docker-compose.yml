@@ -6,8 +6,8 @@ services:
       - ./:/tmp/lint
     environment:
       MEGALINTER_CONFIG: .github/linters/.mega-linter.yml
-      VALIDATE_ALL_CODEBASE: true
       REPORT_OUTPUT_FOLDER: none
+      VALIDATE_ALL_CODEBASE: true
 
   # ---- readme generator ---- #
   readme:
