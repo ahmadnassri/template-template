@@ -18,7 +18,6 @@ jobs:
         with:
           config: .github/linters/.commit-lint.yml
 
-
   mega-linter:
     timeout-minutes: 5
 
