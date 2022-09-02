@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3.0.2
 
-      - uses: oxsecurity/megalinter@v6
+      - uses: oxsecurity/megalinter/flavors/documentation@v6
         env:
           GITHUB_TOKEN: ${{ github.token }}
           MEGALINTER_CONFIG: .github/linters/.mega-linter.yml
