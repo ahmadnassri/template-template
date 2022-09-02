@@ -1,4 +1,7 @@
-on: push
+on:
+  - push
+  - workflow_dispatch
+
 
 name: push
 
@@ -6,6 +9,19 @@ concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
 
 jobs:
+  metadata:
+    runs-on: ubuntu-latest
+
+    outputs:
+      repository_is_template: ${{ steps.metadata.outputs.repository_is_template }}
+      repository_default_branch: ${{ steps.metadata.outputs.repository_default_branch }}
+
+    steps:
+      - uses: actions/checkout@v3.0.2
+
+      - id: metadata
+        uses: ahmadnassri/action-metadata@v2.1.1
+
   commit-lint:
     timeout-minutes: 5
 
@@ -36,20 +52,23 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: ${{ success() }} || ${{ failure() }}
         with:
-          name: MegaLinter reports
+          name: mega-linter-reports
           path: |
             megalinter-reports
             mega-linter.log
 
   template-sync:
-    timeout-minutes: 20
+    timeout-minutes: 5
 
     needs:
+      - metadata
       - commit-lint
       - mega-linter
 
-    # only runs on main branch
-    if: ${{ github.ref == 'refs/heads/master' }}
+    # only runs on main branch for template repos
+    if: |
+      needs.metadata.outputs.repository_is_template == 'true' &&
+      needs.metadata.outputs.repository_default_branch == github.ref_name
 
     runs-on: ubuntu-latest
 
