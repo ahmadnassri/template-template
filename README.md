@@ -1,4 +1,4 @@
-# Template for templates
+# Template for GiHhub Templates Repositories
 
 A template for GitHub Template Repositories!
 
