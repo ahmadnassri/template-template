@@ -1,5 +1,4 @@
 additional:
-  # temporarily include repos manually # https://github.com/github/docs/issues/4894
   - "template-*"
 
 files:
