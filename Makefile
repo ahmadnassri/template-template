@@ -3,7 +3,7 @@
 pull: ## pull latest containers
 	@docker compose pull
 
-lint: ## run super-linter
+lint: ## run mega-linter
 	@docker compose run --rm lint
 
 readme: ## run readme action
