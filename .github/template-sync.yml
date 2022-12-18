@@ -3,6 +3,7 @@ additional:
 
 files:
   - "!.github/workflows/push.yml"
+  - "!.github/dependabot.yml"
   - "!.gitignore"
   - "!**/template-sync.yml"
   - "!colophon.yml"
