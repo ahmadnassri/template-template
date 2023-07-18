@@ -21,6 +21,7 @@ jobs:
 
     permissions:
       contents: write
+      statuses: write
       pull-requests: write
 
   template-sync:
