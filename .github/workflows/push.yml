@@ -1,8 +1,8 @@
+name: push
+
 on:
   - push
   - workflow_dispatch
-
-name: push
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -13,30 +13,21 @@ jobs:
   metadata:
     uses: ahmadnassri/actions/.github/workflows/metadata.yml@master
 
-  lint-commit:
+  lint-commits:
     uses: ahmadnassri/actions/.github/workflows/lint-commits.yml@master
 
   lint-javascript:
     uses: ahmadnassri/actions/.github/workflows/lint-javascript.yml@master
 
   template-sync:
-    timeout-minutes: 5
-
     needs:
       - metadata
-      - commit-lint
-      - mega-linter
+      - lint-commits
+      - lint-javascript
 
-    # only runs on main branch for template repos
-    if: |
-      needs.metadata.outputs.repository_is_template == 'true' &&
-      needs.metadata.outputs.repository_default_branch == github.ref_name
+    secrets: inherit
 
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3.5.3
-
-      - uses: ahmadnassri/action-template-repository-sync@v2.3.4
-        with:
-          github-token: ${{ secrets.GH_TOKEN }}
+    uses: ahmadnassri/actions/.github/workflows/template-sync.yml@master
+    with:
+      repository_is_template: ${{ needs.metadata.outputs.repository_is_template }}
+      repository_default_branch: ${{ needs.metadata.outputs.repository_default_branch }}
