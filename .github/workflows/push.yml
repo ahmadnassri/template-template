@@ -19,6 +19,10 @@ jobs:
   lint-javascript:
     uses: ahmadnassri/actions/.github/workflows/lint-javascript.yml@master
 
+    permissions:
+      contents: write
+      pull-requests: write
+
   template-sync:
     needs:
       - metadata

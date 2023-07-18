@@ -9,6 +9,8 @@ on: pull_request_target
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
 
+permissions: read-all
+
 jobs:
   metadata:
     uses: ahmadnassri/actions/.github/workflows/metadata.yml@master
@@ -26,3 +28,7 @@ jobs:
     needs: template-sync
     secrets: inherit
     uses: ahmadnassri/actions/.github/workflows/auto-merge.yml@master
+
+    permissions:
+      contents: write
+      pull-requests: write
