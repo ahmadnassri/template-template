@@ -33,8 +33,8 @@ jobs:
     secrets: inherit
 
     if: |
-      inputs.repository_is_template == 'true' &&
-      inputs.repository_default_branch == github.ref_name
+      needs.metadata.outputs.repository_is_template == 'true' &&
+      needs.metadata.outputs.repository_default_branch == github.ref_name
 
     uses: ahmadnassri/actions/.github/workflows/template-sync.yml@master
     with:
