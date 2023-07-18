@@ -13,40 +13,11 @@ jobs:
   metadata:
     uses: ahmadnassri/actions/.github/workflows/metadata.yml@master
 
-  commit-lint:
-    timeout-minutes: 5
+  lint-commit:
+    uses: ahmadnassri/actions/.github/workflows/lint-commits.yml@master
 
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3.5.3
-
-      - uses: ahmadnassri/action-commit-lint@v2.1.9
-        with:
-          config: .github/linters/.commit-lint.yml
-
-  mega-linter:
-    timeout-minutes: 5
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3.5.3
-
-      - uses: oxsecurity/megalinter/flavors/documentation@v7.1.0
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          MEGALINTER_CONFIG: .github/linters/.mega-linter.yml
-          GITHUB_COMMENT_REPORTER: true
-          GITHUB_STATUS_REPORTER: true
-
-      - uses: actions/upload-artifact@v3
-        if: ${{ success() }} || ${{ failure() }}
-        with:
-          name: mega-linter-reports
-          path: |
-            megalinter-reports
-            mega-linter.log
+  lint-javascript:
+    uses: ahmadnassri/actions/.github/workflows/lint-javascript.yml@master
 
   template-sync:
     timeout-minutes: 5
