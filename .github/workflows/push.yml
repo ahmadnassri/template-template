@@ -16,8 +16,8 @@ jobs:
   lint-commits:
     uses: ahmadnassri/actions/.github/workflows/lint-commits.yml@master
 
-  lint-javascript:
-    uses: ahmadnassri/actions/.github/workflows/lint-javascript.yml@master
+  lint-content:
+    uses: ahmadnassri/actions/.github/workflows/lint-documentation.yml@master
 
     permissions:
       contents: write
@@ -28,7 +28,7 @@ jobs:
     needs:
       - metadata
       - lint-commits
-      - lint-javascript
+      - lint-content
 
     secrets: inherit
 
