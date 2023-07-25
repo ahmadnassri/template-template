@@ -19,7 +19,7 @@ jobs:
     needs: metadata
     secrets: inherit
 
-    if: ${{ inputs.repository_is_template == 'true' }}
+    if: ${{ needs.metadata.outputs.repository_is_template == 'true' }}
 
     uses: ahmadnassri/actions/.github/workflows/template-sync.yml@master
     with:
