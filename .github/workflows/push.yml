@@ -32,11 +32,6 @@ jobs:
 
     secrets: inherit
 
-    if: |
-      needs.metadata.outputs.repository_is_template == 'true' &&
-      needs.metadata.outputs.repository_default_branch == github.ref_name
+    if: ${{ needs.metadata.outputs.repository_default_branch == github.ref_name }}
 
     uses: ahmadnassri/actions/.github/workflows/template-sync.yml@master
-    with:
-      repository_is_template: ${{ needs.metadata.outputs.repository_is_template }}
-      repository_default_branch: ${{ needs.metadata.outputs.repository_default_branch }}
