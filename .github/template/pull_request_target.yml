@@ -1,6 +1,6 @@
-# --------------------------------------------- #
-# Note: this file originates in template-docker #
-# --------------------------------------------- #
+# ----------------------------------------------- #
+# Note: this file originates in template-template #
+# ----------------------------------------------- #
 
 name: pull_request_target
 
