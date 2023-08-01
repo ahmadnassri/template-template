@@ -11,8 +11,7 @@ permissions: read-all
 jobs:
   main:
     uses: ahmadnassri/actions/.github/workflows/pull-request-target-template.yml@master
-    secrets:
-      github-token: ${{ secrets.GH_TOKEN }}
+    secrets: inherit
     permissions:
       contents: write
       pull-requests: write
