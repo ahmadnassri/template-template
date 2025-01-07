@@ -11,12 +11,11 @@ Automated through [`@ahmadnassri/action-template-repository-sync`][]
 
   [`@ahmadnassri/action-template-repository-sync`]: https://github.com/ahmadnassri/action-template-repository-sync
 
-----
-> Author: [Ahmad Nassri](https://www.ahmadnassri.com/) &bull;
-> Twitter: [@AhmadNassri](https://twitter.com/AhmadNassri)
+---
+
+> Author: [Ahmad Nassri](https://www.ahmadnassri.com/) &
 
 [license-url]: LICENSE
 [license-img]: https://badgen.net/github/license/ahmadnassri/template-template
-
 [release-url]: https://github.com/ahmadnassri/template-template/releases
 [release-img]: https://badgen.net/github/release/ahmadnassri/template-template
