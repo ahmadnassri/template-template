@@ -9,3 +9,4 @@ files:
   - "!docs/**"
   - "!Makefile"
   - "!README.md"
+  - "docs/README.template"
